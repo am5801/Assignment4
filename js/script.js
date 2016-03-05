@@ -1,12 +1,15 @@
 var basemapUrl = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
   var attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
 
-  //map 3 is a rebuild of this leaflet choropleth demo: http://leafletjs.com/examples/choropleth.html
+  //map 1 is a rebuild of this leaflet choropleth demo: http://leafletjs.com/examples/choropleth.html
+
+  //initial content in information window
+  $('#infoWindow').html('Information Window<br />Updates as you hover over a tract');
 
   //initialize map3
   var map1 = L.map('map1', {
     scrollWheelZoom: true
-  }).setView([40.739061, -73.952654], 10);
+  }).setView([40.739061, -73.952654], 11);
 
   //CartoDB Basemap
   L.tileLayer(basemapUrl,{
@@ -33,7 +36,7 @@ var basemapUrl = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
         opacity: 0.5,
         color: '',
         dashArray: '',
-        fillOpacity: 0.9
+        fillOpacity: 1
     };
   }
 
@@ -45,7 +48,7 @@ var basemapUrl = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
         weight: 2,
         color: '#006d2c',
         dashArray: '',
-        fillOpacity: 0.7
+        fillOpacity: 0.1
     });
 
     if (!L.Browser.ie && !L.Browser.opera) {
@@ -54,7 +57,7 @@ var basemapUrl = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
 
     //update the text in the infowindow with whatever was in the data
     console.log(layer.feature.properties.NTAName);
-    $('#infoWindow').text(layer.feature.properties.NTAName+'; REDI Score: '+Math.round(layer.feature.properties.redi_nor_1));
+    $('#infoWindow').html(layer.feature.properties.NTAName+'<br />REDI Score: '+Math.round(layer.feature.properties.redi_nor_1));
 
   }
 
@@ -82,4 +85,4 @@ var basemapUrl = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
     }).addTo(map1);
   });
 
-  map1.setZoom(13);
+  // map1.setZoom(9);
